@@ -1,0 +1,34 @@
+{
+	"name": "pokecord",
+	"version": "1.0.0",
+	"description": "",
+	"main": "dist/index.js",
+	"scripts": {
+		"start": "npm dist/index.js",
+		"postinstall": "npm run tsc",
+		"tsc": "tsc"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/MathleteDev/Pokecord.git"
+	},
+	"author": "TheMathlete",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/MathleteDev/Pokecord/issues"
+	},
+	"homepage": "https://github.com/MathleteDev/Pokecord#readme",
+	"dependencies": {
+		"@types/common-tags": "^1.8.0",
+		"@types/node": "^14.14.25",
+		"axios": "^0.21.1",
+		"common-tags": "^1.8.0",
+		"dotenv": "^8.2.0",
+		"eris": "^0.14.0",
+		"eris-sharder": "^1.10.0",
+		"typescript": "^4.1.5"
+	},
+	"engines": {
+		"node": "15.6.0"
+	}
+}
