@@ -25,7 +25,7 @@
 		"common-tags": "^1.8.0",
 		"dotenv": "^8.2.0",
 		"eris": "^0.14.0",
-		"eris-sharder": "^1.10.0",
+		"eris-sharder": "github:discordware/eris-sharder",
 		"typescript": "^4.1.5"
 	},
 	"engines": {
