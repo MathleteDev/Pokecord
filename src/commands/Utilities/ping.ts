@@ -13,7 +13,8 @@ module.exports = new Command(
 			content: "Check the latency of the bot!",
 			examples: ["ping"]
 		},
-		permissions: ["sendMessages", "embedLinks"]
+		permissions: ["sendMessages", "embedLinks"],
+		cd: 1e4
 	},
 
 	async ({ bot, message }: MessageArgs): Promise<void> => {

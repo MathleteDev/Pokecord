@@ -20,6 +20,7 @@ export interface CommandArgs {
 	description: Description;
 	permissions?: string[];
 	args?: Argument[];
+	cd?: number;
 }
 
 export interface Description {

@@ -1,7 +1,7 @@
 import { EmbedOptions } from "eris";
 import Command from "../command";
 import { MessageArgs } from "../args";
-import IUser from "../../interfaces/user";
+import { IUser } from "../../models/user";
 
 // * Get a user's balance
 module.exports = new Command(

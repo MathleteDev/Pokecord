@@ -20,7 +20,8 @@ module.exports = new Command(
 				description: "1|10000",
 				required: true
 			}
-		]
+		],
+		cd: 1e4
 	},
 
 	async ({ bot, message, args }: MessageArgs): Promise<void> => {

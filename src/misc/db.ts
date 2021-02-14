@@ -1,8 +1,8 @@
 import { connect, Types } from "mongoose";
 import Bot from "../main";
 import { config } from "dotenv";
-import User from "../models/user";
-import IUser from "../interfaces/user";
+import User, { IUser } from "../models/user";
+import Cooldown, { ICooldown } from "../models/cooldown";
 config();
 connect(process.env.DB_URI!, {
 	useNewUrlParser: true,
@@ -40,5 +40,31 @@ export default class DB {
 		const user: IUser = await this.getUser(userID);
 		user.coins += amount;
 		user.save().catch((err: any) => console.log(err));
+	}
+
+	public async getCD(
+		userID: string,
+		command: string
+	): Promise<ICooldown | void | null> {
+		const res: ICooldown | void | null = await Cooldown.findOne({
+			userID,
+			command
+		}).catch((err: any) => console.log(err));
+		return res;
+	}
+
+	public async addCD(
+		userID: string,
+		command: string,
+		createdAt: number
+	): Promise<void> {
+		const res: ICooldown | void | null = await this.getCD(userID, command);
+		if (!res) {
+			const cooldown = new Cooldown({ userID, command, createdAt });
+			cooldown.save().catch((err: any) => console.log(err));
+			return;
+		}
+		res.createdAt = createdAt;
+		res.save().catch((err: any) => console.log(err));
 	}
 }

@@ -1,7 +1,7 @@
 import { EmbedOptions } from "eris";
 import Command from "../command";
 import { MessageArgs } from "../args";
-import IUser from "../../interfaces/user";
+import { IUser } from "../../models/user";
 
 // * Gives a user 100 - 350 coins every day
 module.exports = new Command(
@@ -13,7 +13,8 @@ module.exports = new Command(
 			content: "Get some coins evey 24 hours!",
 			examples: ["daily"]
 		},
-		permissions: ["sendMessages", "embedLinks"]
+		permissions: ["sendMessages", "embedLinks"],
+		cd: 8.64e7
 	},
 
 	async ({ bot, message }: MessageArgs): Promise<EmbedOptions> => {

@@ -7,8 +7,9 @@ import {
 import Bot from "../main";
 import Command from "../commands/command";
 import { Argument } from "../commands/args";
-import { Pokemon } from "./pokeapi";
 import get from "axios";
+import { config } from "dotenv";
+config();
 
 // * Commonly used utilities
 export default class Utils {
@@ -46,6 +47,30 @@ export default class Utils {
 		if (!arr.length) return last;
 		if (arr.length === 1) return `${arr[0]} and ${last}`;
 		return `${arr.join(", ")}, and ${last}`;
+	}
+
+	public parseTime(ms: number): Record<string, number> {
+		let s: number = ms / 1000;
+		const h: number = Math.floor(s / 3600);
+		s %= 3600;
+		const m: number = Math.floor(s / 60);
+		s %= 60;
+		s = h && m ? Math.round(s) : Math.round(s * 10) / 10;
+		return {
+			h,
+			m,
+			s
+		};
+	}
+
+	public joinTime(ms: number): string {
+		const time: Record<string, number> = this.parseTime(ms);
+		const keys = Object.keys(time);
+		return this.joinParts(
+			keys
+				.filter((key: string) => time[key] !== 0)
+				.map((key: string) => `**${time[key]}**${key}`)
+		);
 	}
 
 	public pickRandom = <T>(arr: T[]): T =>
@@ -116,5 +141,9 @@ export default class Utils {
 			`https://pokeapi.co/api/v2/pokemon-species/${name}`
 		).catch(() => {});
 		return res;
+	}
+
+	public isDev(userID: string): boolean {
+		return process.env.BOT_OWNERS!.split(", ").includes(userID);
 	}
 }

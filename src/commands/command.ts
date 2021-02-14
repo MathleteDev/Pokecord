@@ -1,4 +1,6 @@
 import { AdvancedMessageContent, EmbedOptions, Permission } from "eris";
+import { builtinModules } from "module";
+import { ICooldown } from "../models/cooldown";
 import { Argument, CommandArgs, MessageArgs } from "./args";
 
 export default class Command {
@@ -59,6 +61,23 @@ export default class Command {
 					};
 				}
 			}
+		}
+
+		if (this.props.cd && !bot.utils.isDev(message.author.id)) {
+			const cd: ICooldown | void | null = await bot.db.getCD(
+				message.author.id,
+				this.props.name
+			);
+			if (cd && Date.now() < cd.createdAt + this.props.cd) {
+				return {
+					title: "⏳ Cooldown",
+					description: `Please wait ${bot.utils.joinTime(
+						cd.createdAt + this.props.cd - Date.now()
+					)} before using this command again!`,
+					color: bot.colors.red
+				};
+			}
+			bot.db.addCD(message.author.id, this.props.name, Date.now());
 		}
 
 		try {

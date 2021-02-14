@@ -1,5 +1,9 @@
-import { Schema, model } from "mongoose";
-import IUser from "../interfaces/user";
+import { Document, model, Schema } from "mongoose";
+
+export interface IUser extends Document {
+	userID: string;
+	coins: number;
+}
 
 export default model<IUser>(
 	"User",
