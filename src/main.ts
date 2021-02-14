@@ -4,6 +4,8 @@ import { Base } from "eris-sharder";
 import { Client } from "eris";
 import Command from "./commands/command";
 import Utils from "./misc/utils";
+import DB from "./misc/db";
+import ReactionHandler from "./misc/reactionHandler";
 
 // ! FIXED: ./node_modules/eris-sharder/src/sharding/cluster.js:261
 // ! "Your code has not been loaded! This is due to it not extending the Base class. Please extend the Base class!"
@@ -15,12 +17,13 @@ export default class Bot extends Base {
 	public categories: string[] = readdirSync(join(__dirname, "commands")).filter(
 		(dir: string) => !dir.endsWith(".js")
 	);
+	public utils: Utils = new Utils(this);
+	public db: DB = new DB(this);
 	public colors: Record<string, number> = {
 		blue: 0x0066ff,
 		red: 0xff0000
 	};
-	public utils: Utils = new Utils(this);
-	// public reactionHandler: ReactionHandler = new ReactionHandler();
+	public reactionHandler: ReactionHandler = new ReactionHandler();
 
 	public constructor(client: { bot: Client; clusterID: number }) {
 		super(client);
