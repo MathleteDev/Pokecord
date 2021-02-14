@@ -19,11 +19,12 @@ export default class Bot extends Base {
 	);
 	public utils: Utils = new Utils(this);
 	public db: DB = new DB(this);
+	public reactionHandler: ReactionHandler = new ReactionHandler();
 	public colors: Record<string, number> = {
 		blue: 0x0066ff,
+		green: 0x00ff00,
 		red: 0xff0000
 	};
-	public reactionHandler: ReactionHandler = new ReactionHandler();
 
 	public constructor(client: { bot: Client; clusterID: number }) {
 		super(client);

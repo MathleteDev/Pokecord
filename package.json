@@ -27,7 +27,7 @@
 		"dotenv": "^8.2.0",
 		"eris": "^0.14.0",
 		"eris-sharder": "github:discordware/eris-sharder",
-		"mongoose": "^5.11.16",
+		"mongoose": "^5.11.15",
 		"typescript": "^4.1.5"
 	},
 	"engines": {

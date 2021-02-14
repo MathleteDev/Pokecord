@@ -6,6 +6,7 @@ import { config } from "dotenv";
 config();
 
 const CATEGORIES: Record<string, string> = {
+	Currency: "💰",
 	Utilities: "🛠️"
 };
 
@@ -81,7 +82,8 @@ module.exports = new Command(
 					value: bot.cmds
 						.filter((cmd: Command) => cmd.props.category === cat)
 						.map((cmd: Command) => `\`${cmd.props.name}\``)
-						.join("\n")
+						.join("\n"),
+					inline: true
 				}))
 			};
 	}
